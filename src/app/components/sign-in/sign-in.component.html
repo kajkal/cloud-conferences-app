@@ -1,0 +1,111 @@
+<section class="form-section">
+
+    <mat-card class="form-card">
+
+        <mat-card-title>
+            Sign in
+        </mat-card-title>
+
+        <form novalidate [formGroup]="form" (ngSubmit)="signIn()">
+
+            <mat-card-content>
+
+                <mat-form-field>
+
+                    <input
+                        matInput
+                        type="text"
+                        placeholder="Email"
+                        formControlName="email"
+                        id="email"
+                    >
+
+                    <mat-error *ngIf="email.invalid">
+
+                        <span *ngIf="email.errors.required">
+                            Email is required.
+                        </span>
+
+                        <span *ngIf="email.errors.email">
+                            Provide valid email.
+                        </span>
+
+                        <span *ngIf="email.errors.userNotFound">
+                            {{ email.errors.userNotFound }}
+                        </span>
+
+                    </mat-error>
+
+                </mat-form-field>
+
+                <mat-form-field>
+
+                    <input
+                        matInput
+                        type="password"
+                        placeholder="Password"
+                        formControlName="password"
+                        id="password"
+                    >
+
+                    <mat-error *ngIf="password.invalid">
+
+                        <span *ngIf="password.errors.required">
+                            Password is required.
+                        </span>
+
+                        <span *ngIf="password.errors.minlength">
+                            Password should be minimum {{ password.errors.minlength.requiredLength }} characters.
+                        </span>
+
+                        <span *ngIf="password.errors.wrongPassword">
+                            {{ password.errors.wrongPassword }}
+                        </span>
+
+                    </mat-error>
+
+                </mat-form-field>
+
+            </mat-card-content>
+
+
+            <mat-card-actions>
+
+                <mat-error *ngIf="form.errors?.tooManyRequests" class="form-error-message">
+                    <span>
+                        {{ form.errors.tooManyRequests }}
+                    </span>
+                </mat-error>
+
+                <button
+                    mat-raised-button
+                    color="primary"
+                    type="submit"
+                    [disabled]="form.invalid || pending"
+                >
+                    Sign in
+                </button>
+
+            </mat-card-actions>
+
+        </form>
+
+        <details>
+            <summary>registered users (to be removed)</summary>
+            <table style="border-collapse: separate; border-spacing: 16px;">
+                <tr>
+                    <td>user1@domain.com</td>
+                    <td>haslo88</td>
+                </tr>
+                <tr>
+                    <td>admin@domain.com</td>
+                    <td>haslo88</td>
+                </tr>
+            </table>
+        </details>
+
+        <mat-progress-bar mode="indeterminate" *ngIf="pending"></mat-progress-bar>
+
+    </mat-card>
+
+</section>

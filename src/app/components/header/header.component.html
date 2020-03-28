@@ -1,0 +1,52 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row *ngIf="mode$ | async as mode">
+
+        <a class="logo" routerLink="/conferences">
+            Cloud conferences App
+        </a>
+
+        <ng-container *ngIf="mode === 'GUEST'">
+
+            <a mat-button class="link" routerLink="/sign-in" routerLinkActive="active">
+                Sign in
+            </a>
+
+            <a mat-button class="link" routerLink="/sign-up" routerLinkActive="active">
+                Sign up
+            </a>
+
+        </ng-container>
+
+        <ng-container *ngIf="mode === 'USER' || mode === 'ADMIN'">
+
+            <button mat-icon-button routerLink="/cart">
+                <mat-icon matBadge="{{ selectedPlacesCount$ | async }}" matBadgeColor="accent">shopping_cart</mat-icon>
+            </button>
+
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+
+            <mat-menu #menu="matMenu">
+
+                <button mat-menu-item routerLink="/admin/new-conference" *ngIf="mode === 'ADMIN'">
+                    <mat-icon>add</mat-icon>
+                    <span>Add Conference</span>
+                </button>
+
+                <button mat-menu-item routerLink="/conferences">
+                    <mat-icon>list</mat-icon>
+                    <span>Conferences</span>
+                </button>
+
+                <button mat-menu-item routerLink="/logout">
+                    <mat-icon>exit_to_app</mat-icon>
+                    <span>Logout</span>
+                </button>
+
+            </mat-menu>
+
+        </ng-container>
+
+    </mat-toolbar-row>
+</mat-toolbar>
