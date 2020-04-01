@@ -1,5 +1,5 @@
 .mat-drawer {
-    min-width: 200px;
+    min-width: 350px;
     padding: 1em;
 
     .filter-container {
@@ -48,13 +48,22 @@
 
 @media (min-width: 900px) {
     .mat-drawer-content {
+        display: flex;
+        // align-items: center;
+        justify-content: center;
         .conferences {
-            height: calc(100vh - 64px);
-            padding: 1em;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin: 1em;
+            width: 70%;
+            // height: calc(100vh - 64px);
+            // width: 50vw;
+            // padding: 1em;
 
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(800px, 1fr));
-            grid-gap: 1em;
+            // display: grid;
+            // grid-template-columns: repeat(auto-fit, minmax(800px, 1fr));
+            // grid-gap: 1em;
         }
     }
 }
