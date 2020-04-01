@@ -1,0 +1,122 @@
+<mat-card class="conference-details">
+    <mat-card-content *ngIf="(conference$ | async) as conference">
+
+        <div class="conference-actions" *ngIf="(authService.authState$ | async) as user">
+
+            <ng-container *ngIf="user.isAdmin">
+
+                <button mat-icon-button [matMenuTriggerFor]="menu">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+
+                <mat-menu #menu="matMenu">
+
+                    <button mat-menu-item (click)="handleOpenUpdateConferenceDialog(conference)">
+                        <mat-icon>build</mat-icon>
+                        <span>Update</span>
+                    </button>
+
+                    <button mat-menu-item (click)="handleRemove(conference)">
+                        <mat-icon>delete</mat-icon>
+                        <span>Delete</span>
+                    </button>
+
+                </mat-menu>
+
+            </ng-container>
+
+        </div>
+
+        <mat-card-title>{{ conference.name }}</mat-card-title>
+
+        <mat-card-subtitle>
+            <span>{{ conference.startDate | date }}</span>
+            <span style="padding: 0.5em">-</span>
+            <span>{{ conference.endDate | date }}</span>
+            <div class="price">{{ conference.price | currency:'EUR' }}</div>
+        </mat-card-subtitle>
+
+        <p class="description">{{ conference.description }}</p>
+
+        <div class="gallery">
+            <div class="image-container d-none d-lg-block"
+                [style.background-image]="'url('+conference.thumbnailUrl+')'"></div>
+            <div class="image-container d-none d-lg-block"
+                [style.background-image]="'url('+conference.thumbnailUrl+')'"></div>
+            <div class="image-container d-none d-lg-block"
+                [style.background-image]="'url('+conference.thumbnailUrl+')'"></div>
+            <div class="image-container d-none d-lg-block"
+                [style.background-image]="'url('+conference.thumbnailUrl+')'"></div>
+        </div>
+
+        <span [style.color]="getReservedPlacesCount(conference) === 0 ? '#ccc' : 'inherit'">
+            Reserved places: {{ getReservedPlacesCount(conference) }}
+        </span>
+
+        <mat-list class="comments">
+
+            <h3 mat-subheader>Comments</h3>
+
+            <mat-list-item *ngIf="!conference.comments || !conference.comments.length">
+
+                <mat-icon mat-list-icon>not_interested</mat-icon>
+
+                <p mat-line class="content">No comments yet.</p>
+
+            </mat-list-item>
+
+            <mat-list-item *ngFor="let comment of conference.comments" class="comment">
+
+                <mat-icon mat-list-icon>comment</mat-icon>
+
+                <div mat-line>
+                    <span class="author"> {{comment.author}}</span>
+                    <span class="timestamp"> {{comment.timestamp | date:'medium'}} </span>
+                </div>
+
+                <p mat-line class="content">{{comment.content}}</p>
+
+            </mat-list-item>
+
+            <form
+                *ngIf="getReservedPlacesCount(conference) > 0"
+                novalidate
+                [formGroup]="form"
+                (ngSubmit)="addComment(conference)"
+            >
+                <mat-list-item class="add-comment">
+
+                    <mat-icon mat-list-icon>add</mat-icon>
+
+                    <div mat-line>
+
+                        <mat-form-field>
+                            <input
+                                matInput
+                                type="text"
+                                placeholder="Add comment"
+                                formControlName="comment" id="comment"
+                            >
+
+                            <mat-error *ngIf="comment.invalid">
+                                <span *ngIf="comment.errors.required">Comment is required.</span>
+                            </mat-error>
+                        </mat-form-field>
+
+                        <button
+                            mat-raised-button
+                            color="primary"
+                            [disabled]="form.invalid"
+                        >
+                            Add comment
+                        </button>
+
+                    </div>
+
+                </mat-list-item>
+            </form>
+
+        </mat-list>
+
+    </mat-card-content>
+</mat-card>
