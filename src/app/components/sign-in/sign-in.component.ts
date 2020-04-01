@@ -39,18 +39,18 @@ export class SignInComponent implements OnInit {
     }
 
     signIn() {
-        console.log('signIn', this.form.value);
+        // console.log('signIn', this.form.value);
 
         this.pending = true;
         const { email, password } = this.form.value;
 
         this.authService.login({ email, password })
             .then(result => {
-                console.log('signIn success', result);
+                // console.log('signIn success', result);
                 this.router.navigate([ '/conferences' ]);
             })
             .catch(error => {
-                console.log('signIn error', error);
+                // console.log('signIn error', error);
                 if (error && error.code === 'auth/user-not-found') {
                     this.email.setErrors({
                         userNotFound: error.message,
