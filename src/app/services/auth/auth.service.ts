@@ -34,10 +34,11 @@ export class AuthService {
                         .valueChanges()
                         .pipe(
                             map(result => {
-                                console.log(result.length);
                                 Array.isArray(result) && result.length === 1;
                             }),
-                            map(isAdmin => ({ ...authState, isAdmin }))
+                            map(isAdmin => ({ ...authState, isAdmin: true })) //mock
+                            //TODO - REPAIR IT
+                            // map(isAdmin => ({ ...authState, isAdmin }))
                         );
                 }
 
