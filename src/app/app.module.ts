@@ -15,6 +15,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { environment } from '../environments/environment';
 import { LogoutComponent } from './components/logout/logout.component';
 import { HeaderComponent } from './components/header/header.component';
+import { ConferenceThumbnailComponent } from './components/conference-thumbnail/conference-thumbnail.component';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { HeaderComponent } from './components/header/header.component';
         ConferencesComponent,
         LogoutComponent,
         HeaderComponent,
+        ConferenceThumbnailComponent,
     ],
     imports: [
         BrowserModule,
