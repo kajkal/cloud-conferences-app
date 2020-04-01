@@ -1,10 +1,9 @@
-import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { User } from 'firebase';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFireDatabase } from '@angular/fire/database';
-import { map, switchMap, tap } from 'rxjs/operators';
-
+import { Injectable } from "@angular/core";
+import { Observable, of } from "rxjs";
+import { User } from "firebase";
+import { AngularFireAuth } from "@angular/fire/auth";
+import { AngularFireDatabase } from "@angular/fire/database";
+import { map, switchMap, tap } from "rxjs/operators";
 
 export interface UserWithRole extends User {
     isAdmin: boolean;
@@ -16,34 +15,38 @@ export interface Credentials {
 }
 
 @Injectable({
-    providedIn: 'root',
+    providedIn: "root"
 })
 export class AuthService {
-
     readonly authState$: Observable<UserWithRole | null>;
 
     constructor(
         private db: AngularFireDatabase,
-        private fireAuth: AngularFireAuth,
+        private fireAuth: AngularFireAuth
     ) {
-        this.authState$ = fireAuth.authState
-            .pipe(
-                switchMap(authState => {
-                    if (authState !== null) {
-                        return this.db.list('/admins', ref => ref.orderByKey().equalTo(authState.uid))
-                            .valueChanges()
-                            .pipe(
-                                map(result => Array.isArray(result) && result.length === 1),
-                                map(isAdmin => ({ ...authState, isAdmin })),
-                            );
-                    }
+        this.authState$ = fireAuth.authState.pipe(
+            switchMap(authState => {
+                if (authState !== null) {
+                    return this.db
+                        .list("/admins", ref =>
+                            ref.orderByKey().equalTo(authState.uid)
+                        )
+                        .valueChanges()
+                        .pipe(
+                            map(result => {
+                                console.log(result.length);
+                                Array.isArray(result) && result.length === 1;
+                            }),
+                            map(isAdmin => ({ ...authState, isAdmin }))
+                        );
+                }
 
-                    return of(null);
-                }),
-                tap(authState => {
-                    console.log('AuthService', authState);
-                }),
-            );
+                return of(null);
+            }),
+            tap(authState => {
+                // console.log("AuthService", authState);
+            })
+        );
     }
 
     get user(): User | null {
@@ -55,11 +58,13 @@ export class AuthService {
     }
 
     register({ email, password }: Credentials) {
-        return this.fireAuth.auth.createUserWithEmailAndPassword(email, password);
+        return this.fireAuth.auth.createUserWithEmailAndPassword(
+            email,
+            password
+        );
     }
 
     logout() {
         return this.fireAuth.auth.signOut();
     }
-
 }
