@@ -16,6 +16,7 @@ import { environment } from '../environments/environment';
 import { LogoutComponent } from './components/logout/logout.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ConferenceThumbnailComponent } from './components/conference-thumbnail/conference-thumbnail.component';
+import { AddConferenceComponent } from './components/add-conference/add-conference.component';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { ConferenceThumbnailComponent } from './components/conference-thumbnail/
         LogoutComponent,
         HeaderComponent,
         ConferenceThumbnailComponent,
+        AddConferenceComponent,
     ],
     imports: [
         BrowserModule,

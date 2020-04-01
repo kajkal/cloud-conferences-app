@@ -24,7 +24,6 @@ export class HeaderComponent {
                 if (authState === null) {
                     return HeaderMode.GUEST;
                 }
-                console.log(authState.isAdmin);
                 return authState.isAdmin ? HeaderMode.ADMIN : HeaderMode.USER;
             })
         );
