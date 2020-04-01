@@ -18,6 +18,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { ConferenceThumbnailComponent } from './components/conference-thumbnail/conference-thumbnail.component';
 import { AddConferenceComponent } from './components/add-conference/add-conference.component';
 import { ConferenceComponent } from './components/conference/conference.component';
+import { UpdateConferenceComponent } from './components/update-conference/update-conference.component';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { ConferenceComponent } from './components/conference/conference.componen
         ConferenceThumbnailComponent,
         AddConferenceComponent,
         ConferenceComponent,
+        UpdateConferenceComponent,
     ],
     imports: [
         BrowserModule,

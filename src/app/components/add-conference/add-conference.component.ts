@@ -67,9 +67,6 @@ export class AddConferenceComponent implements OnInit {
         return this.form.get("slots");
     }
 
-    get description() {
-        return this.form.get("description");
-    }
 
     get detailUrl() {
         return this.form.get("detailUrl");
