@@ -1,129 +1,200 @@
 <section class="form-section add-conference-form">
     <mat-card class="form-card">
-
         <mat-card-title>
             Add conference
         </mat-card-title>
 
         <form novalidate [formGroup]="form" (ngSubmit)="createConference()">
             <mat-card-content>
-
                 <mat-form-field>
                     <input
-                        matInput type="text"
+                        matInput
+                        type="text"
                         placeholder="Conference name"
-                        formControlName="name" id="name"
-                    >
+                        formControlName="name"
+                        id="name"
+                    />
 
                     <mat-error *ngIf="name.invalid">
-                        <div>{{ name.errors | json }}</div>
+                        <!-- <div>{{ name.errors | json }}</div> -->
 
-                        <span *ngIf="name.errors.required">Conference name is required.</span>
+                        <span *ngIf="name.errors.required"
+                            >Conference name is required.</span
+                        >
                     </mat-error>
                 </mat-form-field>
 
                 <mat-form-field>
                     <input
-                        matInput type="text"
-                        placeholder="Country"
-                        formControlName="country" id="country"
-                    >
+                        matInput
+                        type="text"
+                        placeholder="City"
+                        formControlName="city"
+                        id="city"
+                    />
 
-                    <mat-error *ngIf="country.invalid">
-                        <div>{{ country.errors | json }}</div>
+                    <mat-error *ngIf="city.invalid">
+                        <!-- <div>{{ city.errors | json }}</div> -->
 
-                        <span *ngIf="country.errors.required">Country is required.</span>
+                        <span *ngIf="city.errors.required"
+                            >City is required.</span
+                        >
                     </mat-error>
                 </mat-form-field>
 
                 <mat-form-field>
                     <input
-                        matInput [matDatepicker]="startDatePicker"
+                        matInput
+                        type="text"
+                        placeholder="Organizer"
+                        formControlName="organizer"
+                        id="organizer"
+                    />
+
+                    <mat-error *ngIf="organizer.invalid">
+                        <!-- <div>{{ organizer.errors | json }}</div> -->
+
+                        <span *ngIf="organizer.errors.required"
+                            >Organizer is required.</span
+                        >
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input
+                        matInput
+                        type="text"
+                        placeholder="Contact"
+                        formControlName="contact"
+                        id="contact"
+                    />
+
+                    <mat-error *ngIf="contact.invalid">
+                        <!-- <div>{{ contact.errors | json }}</div> -->
+
+                        <span *ngIf="contact.errors.required"
+                            >Contact is required.</span
+                        >
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input
+                        matInput
+                        type="text"
+                        placeholder="Category"
+                        formControlName="category"
+                        id="category"
+                    />
+
+                    <mat-error *ngIf="category.invalid">
+                        <!-- <div>{{ category.errors | json }}</div> -->
+
+                        <span *ngIf="category.errors.required"
+                            >Category is required.</span
+                        >
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input
+                        matInput
+                        [matDatepicker]="startDatePicker"
                         placeholder="Choose a start date"
-                        formControlName="startDate" id="startDate"
-                    >
-                    <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+                        formControlName="startDate"
+                        id="startDate"
+                    />
+                    <mat-datepicker-toggle
+                        matSuffix
+                        [for]="startDatePicker"
+                    ></mat-datepicker-toggle>
                     <mat-datepicker #startDatePicker></mat-datepicker>
 
                     <mat-error *ngIf="startDate.invalid">
-                        <div>{{ startDate.errors | json }}</div>
+                        <!-- <div>{{ startDate.errors | json }}</div> -->
 
-                        <span *ngIf="startDate.errors.required">Start date is required.</span>
+                        <span *ngIf="startDate.errors.required"
+                            >Start date is required.</span
+                        >
                     </mat-error>
                 </mat-form-field>
 
                 <mat-form-field>
                     <input
-                        matInput [matDatepicker]="endDatePicker"
+                        matInput
+                        [matDatepicker]="endDatePicker"
                         placeholder="Choose a end date"
-                        formControlName="endDate" id="endDate"
-                    >
-                    <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+                        formControlName="endDate"
+                        id="endDate"
+                    />
+                    <mat-datepicker-toggle
+                        matSuffix
+                        [for]="endDatePicker"
+                    ></mat-datepicker-toggle>
                     <mat-datepicker #endDatePicker></mat-datepicker>
 
                     <mat-error *ngIf="endDate.invalid">
-                        <div>{{ endDate.errors | json }}</div>
+                        <!-- <div>{{ endDate.errors | json }}</div> -->
 
-                        <span *ngIf="endDate.errors.required">End date is required.</span>
+                        <span *ngIf="endDate.errors.required"
+                            >End date is required.</span
+                        >
                     </mat-error>
                 </mat-form-field>
 
                 <mat-form-field>
                     <input
-                        matInput type="number"
+                        matInput
+                        type="number"
                         placeholder="Price"
-                        formControlName="price" id="price"
-                    >
+                        formControlName="price"
+                        id="price"
+                    />
 
                     <mat-error *ngIf="price.invalid">
-                        <div>{{ price.errors | json }}</div>
+                        <!-- <div>{{ price.errors | json }}</div> -->
 
-                        <span *ngIf="price.errors.required">Price is required.</span>
+                        <span *ngIf="price.errors.required"
+                            >Price is required.</span
+                        >
                     </mat-error>
                 </mat-form-field>
 
                 <mat-form-field>
                     <input
-                        matInput type="number"
-                        placeholder="Free places"
-                        formControlName="freePlaces" id="freePlaces"
-                    >
+                        matInput
+                        type="number"
+                        placeholder="Slots"
+                        formControlName="slots"
+                        id="slots"
+                    />
 
-                    <mat-error *ngIf="freePlaces.invalid">
-                        <div>{{ freePlaces.errors | json }}</div>
+                    <mat-error *ngIf="slots.invalid">
+                        <!-- <div>{{ slots.errors | json }}</div> -->
 
-                        <span *ngIf="freePlaces.errors.required">Free places is required.</span>
-                    </mat-error>
-                </mat-form-field>
-
-                <mat-form-field>
-                    <textarea
-                        matInput cdkTextareaAutosize
-                        placeholder="Description"
-                        formControlName="description" id="description"
-                    ></textarea>
-
-                    <mat-error *ngIf="description.invalid">
-                        <div>{{ description.errors | json }}</div>
-
-                        <span *ngIf="description.errors.required">Description is required.</span>
+                        <span *ngIf="slots.errors.required"
+                            >Slots is required.</span
+                        >
                     </mat-error>
                 </mat-form-field>
 
                 <mat-form-field>
                     <input
-                        matInput type="text"
-                        placeholder="Photo url"
-                        formControlName="thumbnailUrl" id="thumbnailUrl"
-                    >
+                        matInput
+                        type="text"
+                        placeholder="Event website"
+                        formControlName="detailUrl"
+                        id="detailUrl"
+                    />
 
-                    <mat-error *ngIf="thumbnailUrl.invalid">
-                        <div>{{ thumbnailUrl.errors | json }}</div>
+                    <mat-error *ngIf="detailUrl.invalid">
+                        <!-- <div>{{ detailUrl.errors | json }}</div> -->
 
-                        <span *ngIf="thumbnailUrl.errors.required">Photo url is required.</span>
+                        <span *ngIf="detailUrl.errors.required"
+                            >Event website is required.</span
+                        >
                     </mat-error>
                 </mat-form-field>
-
             </mat-card-content>
 
             <mat-card-actions>
@@ -138,6 +209,7 @@
                     mat-raised-button
                     color="warn"
                     type="button"
+                    routerLink="/conferences"
                 >
                     Cancel
                 </button>
