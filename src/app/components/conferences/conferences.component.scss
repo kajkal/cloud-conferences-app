@@ -49,21 +49,13 @@
 @media (min-width: 900px) {
     .mat-drawer-content {
         display: flex;
-        // align-items: center;
-        justify-content: center;
         .conferences {
             display: flex;
-            flex-direction: column;
-            justify-content: center;
+            flex-wrap: wrap;
             margin: 1em;
-            width: 70%;
-            // height: calc(100vh - 64px);
-            // width: 50vw;
-            // padding: 1em;
-
-            // display: grid;
-            // grid-template-columns: repeat(auto-fit, minmax(800px, 1fr));
-            // grid-gap: 1em;
+        }
+        .conferences > *{
+            margin: 1em;
         }
     }
 }

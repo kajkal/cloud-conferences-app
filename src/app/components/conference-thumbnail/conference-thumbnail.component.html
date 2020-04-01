@@ -9,6 +9,7 @@
                     <p class="organizer">{{ conference.organizer }}</p>
                 </mat-card-subtitle>
                 <div>
+
                     <div style="margin: 1em">
                         <mat-icon style="margin-right: 1em">event</mat-icon>
                         <span>{{ conference.startDate | date }}</span>
@@ -21,68 +22,7 @@
                     </div>
                 </div>
             </div>
-            <div class="conference-booking">
-                <div class="actions" (click)="preventNavigation($event)">
-                    <div class="available">
-                        Available:
-                        <span
-                            class="limit"
-                            [ngClass]="{
-                                low:
-                                    conference.slots -
-                                        getReservedPlacesCount(conference) <
-                                    3,
-                                med:
-                                    conference.slots -
-                                        getReservedPlacesCount(conference) >=
-                                        3 &&
-                                    conference.slots -
-                                        getReservedPlacesCount(conference) <
-                                        10,
-                                high:
-                                    conference.slots -
-                                        getReservedPlacesCount(conference) >=
-                                    10
-                            }"
-                            >{{
-                                conference.slots -
-                                    getReservedPlacesCount(conference)
-                            }}</span
-                        >
-                    </div>
-
-                    <button
-                        class="decrement-btn"
-                        mat-button
-                        (click)="handleSubtract(conference)"
-                        [disabled]="getReservedPlacesCount(conference) === 0"
-                    >
-                        <mat-icon>exposure_neg_1</mat-icon>
-                    </button>
-
-                    <span
-                        [style.color]="
-                            getReservedPlacesCount(conference) === 0
-                                ? '#ccc'
-                                : 'inherit'
-                        "
-                    >
-                        Selected: {{ getReservedPlacesCount(conference) }}
-                    </span>
-
-                    <button
-                        class="increment-btn"
-                        mat-button
-                        (click)="handleAdd(conference)"
-                        [disabled]="
-                            getReservedPlacesCount(conference) ===
-                            conference.freePlaces
-                        "
-                    >
-                        <mat-icon>exposure_plus_1</mat-icon>
-                    </button>
-                </div>
-            </div>
+            
         </mat-card-content>
     </mat-card>
 </a>

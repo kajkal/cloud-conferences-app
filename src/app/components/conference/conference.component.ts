@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 import { retry, tap } from 'rxjs/operators';
 import { AuthService } from '../../services/auth/auth.service';
 import { MatDialog } from '@angular/material';
-// import { UpdateConferenceComponent } from '../update-conference/update-conference.component';
+import { UpdateConferenceComponent } from '../update-conference/update-conference.component';
 
 @Component({
     selector: 'app-conference',
@@ -51,6 +51,41 @@ export class ConferenceComponent implements OnInit {
         });
     }
 
+    preventNavigation($event) {
+        $event.stopPropagation();
+        $event.preventDefault();
+    }
+
+    getReservedPlacesCount(conference: Conference): number {
+        return (
+            this.bookingService.bookingList$.value.conferences.get(conference.key) || 0
+        );
+    }
+
+    handleAdd(conference: Conference) {
+        const bookingList: BookingList = this.bookingService.bookingList$
+            .value;
+        const currentCount = this.getReservedPlacesCount(conference);
+        if (currentCount + 1 <= conference.slots) {
+            bookingList.conferences.set(conference.key, currentCount + 1);
+            this.bookingService.bookingList$.next(bookingList);
+        }
+    }
+
+    handleSubtract(conference: Conference) {
+        const bookingList: BookingList = this.bookingService.bookingList$
+            .value;
+        const currentCount = this.getReservedPlacesCount(conference);
+        if (currentCount - 1 > 0) {
+            bookingList.conferences.set(conference.key, currentCount - 1);
+            this.bookingService.bookingList$.next(bookingList);
+        }
+        if (currentCount - 1 === 0) {
+            bookingList.conferences.delete(conference.key);
+            this.bookingService.bookingList$.next(bookingList);
+        }
+    }
+
     async handleRemove(conference: Conference) {
         try {
             // navigate to conferences
@@ -67,11 +102,11 @@ export class ConferenceComponent implements OnInit {
         }
     }
 
-    // handleOpenUpdateConferenceDialog(conference: Conference) {
-    //     this.dialog.open(UpdateConferenceComponent, {
-    //         data: conference,
-    //     });
-    // }
+    handleOpenUpdateConferenceDialog(conference: Conference) {
+        this.dialog.open(UpdateConferenceComponent, {
+            data: conference,
+        });
+    }
 
     get comment() {
         return this.form.get('comment');
@@ -94,10 +129,6 @@ export class ConferenceComponent implements OnInit {
         } catch (e) {
             console.log('Add comment error', e);
         }
-    }
-
-    getReservedPlacesCount(conference: Conference): number {
-        return this.bookingService.bookingList$.value.conferences.get(conference.key) || 0;
     }
 
 }
