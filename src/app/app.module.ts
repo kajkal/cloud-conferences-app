@@ -17,6 +17,7 @@ import { LogoutComponent } from './components/logout/logout.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ConferenceThumbnailComponent } from './components/conference-thumbnail/conference-thumbnail.component';
 import { AddConferenceComponent } from './components/add-conference/add-conference.component';
+import { ConferenceComponent } from './components/conference/conference.component';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { AddConferenceComponent } from './components/add-conference/add-conferen
         HeaderComponent,
         ConferenceThumbnailComponent,
         AddConferenceComponent,
+        ConferenceComponent,
     ],
     imports: [
         BrowserModule,

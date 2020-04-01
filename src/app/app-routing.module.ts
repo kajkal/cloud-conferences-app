@@ -6,6 +6,7 @@ import { AuthGuard } from "./guards/auth/auth.guard";
 import { ConferencesComponent } from "./components/conferences/conferences.component";
 import { LogoutComponent } from "./components/logout/logout.component";
 import { AddConferenceComponent } from "./components/add-conference/add-conference.component";
+import {ConferenceComponent} from "./components/conference/conference.component";
 
 const routes: Routes = [
     {
@@ -29,11 +30,11 @@ const routes: Routes = [
             {
                 path: "",
                 component: ConferencesComponent
-            }
-            // {
-            //     path: ':conferenceKey',
-            //     component: ConferenceComponent,
-            // },
+            },
+            {
+                path: ':conferenceKey',
+                component: ConferenceComponent,
+            },
         ]
     },
     {
