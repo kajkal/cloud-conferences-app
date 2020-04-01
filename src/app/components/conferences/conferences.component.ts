@@ -20,25 +20,9 @@ export class ConferencesComponent implements OnInit {
             min: 0,
             max: 0,
         },
-        minRating: 1,
         searchPhrase: /.*/,
     };
 
-    // sliderOptions = {
-    //     floor: 0,
-    //     ceil: 0,
-    //     translate: (value: number, label: LabelType): string => {
-    //         switch (label) {
-    //             case LabelType.Low:
-    //                 return '<b>Min price:</b> $' + value;
-    //             case LabelType.High:
-    //                 return '<b>Max price:</b> $' + value;
-    //             default:
-    //                 return '$' + value;
-    //         }
-    //     },
-    //     vertical: true,
-    // };
 
     constructor(
         private conferencesService: ConferencesService,
@@ -57,12 +41,6 @@ export class ConferencesComponent implements OnInit {
                 distinctUntilChanged((a, b) => (a.floor === b.floor) && (a.ceil === b.ceil)),
             )
             .subscribe(({ floor, ceil }) => {
-                // console.log('prices subscribe: ', { floor, ceil });
-
-                // const newSliderOptions = {
-                //     ...this.sliderOptions,
-                //     floor, ceil,
-                // };
 
                 const { min, max } = this.filters.price;
                 let updateFilters = false;
@@ -76,8 +54,6 @@ export class ConferencesComponent implements OnInit {
                     this.filters.price.max = ceil;
                     updateFilters = true;
                 }
-
-                // this.sliderOptions = newSliderOptions;
 
                 if (updateFilters) {
                     this.updateFilters();
@@ -93,7 +69,6 @@ export class ConferencesComponent implements OnInit {
             .pipe(
                 map(conferences => conferences
                     .filter(conference => this.filters.searchPhrase.test(conference.name.toLowerCase()))
-                    .filter(conference => conference.rating.value >= this.filters.minRating || (!(conference.rating.votes || []).length && this.filters.minRating === 1))
                     .filter(conference => conference.price >= this.filters.price.min && conference.price <= this.filters.price.max),
                 ),
                 // tap(console.log),
@@ -110,16 +85,7 @@ export class ConferencesComponent implements OnInit {
     //     this.updateFilters();
     // }
 
-    handleRateFilterChange(newMinRating: number) {
-        // console.log('handleRateFilterChange', { newMinRating });
-
-        this.filters.minRating = newMinRating;
-        this.updateFilters();
-    }
-
     handleSearchFilterKeyUp(event: any) {
-        // console.log('handleSearchFilterKeyUp', event.target.value);
-
         const searchPhrase = event.target.value;
         this.filters.searchPhrase = new RegExp([ '', ...searchPhrase.toLowerCase() ].map(c => `${c}.*`).join(''));
         this.updateFilters();
