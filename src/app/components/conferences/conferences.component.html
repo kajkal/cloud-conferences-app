@@ -1,1 +1,48 @@
-<p>conferences works!</p>
+<button mat-button class="toggle-sidenav" (click)="sidenav.toggle()">
+    Filters
+</button>
+
+<mat-drawer-container class="example-container" autosize>
+
+    <mat-drawer
+        #sidenav
+        [mode]="(layoutService.isMobile$ | async) ? 'over' : 'side'"
+        [opened]="!(layoutService.isMobile$ | async)"
+    >
+
+        <div class="filter-container search-filter">
+            <mat-form-field>
+                <input
+                    matInput
+                    type="text"
+                    placeholder="Search"
+                    (keyup)="handleSearchFilterKeyUp($event)"
+                >
+            </mat-form-field>
+        </div>
+
+        <div class="filter-container price-filter">
+            <h6>Price</h6>
+            <!-- <ng5-slider
+                [(value)]="filters.price.min"
+                [(highValue)]="filters.price.max"
+                (userChange)="handlePriceFilterChange($event)"
+                [options]="sliderOptions"
+            ></ng5-slider> -->
+        </div>
+
+        <div class="filter-container rate-filter">
+            <h6>Rate</h6>
+            <!-- <app-rate mode="select" [ratingValue]="filters.minRating" (rateValueSelect)="handleRateFilterChange($event)"></app-rate> -->
+        </div>
+
+    </mat-drawer>
+
+    <mat-drawer-content>
+        <section class="conferences">
+            <app-conference-thumbnail *ngFor="let conference of filteredConferences$ | async" [conference]="conference">
+            </app-conference-thumbnail>
+        </section>
+    </mat-drawer-content>
+
+</mat-drawer-container>
