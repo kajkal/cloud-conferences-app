@@ -18,7 +18,7 @@ export class ConferencesService {
         });
     }
 
-    private fetchConferences(): Observable<Conference[]> {
+    public fetchConferences(): Observable<Conference[]> {
         return this.db
             .list<Conference>("/conferences")
             .snapshotChanges()

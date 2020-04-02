@@ -119,10 +119,25 @@
             </span>
         </div>
         <div class="other">
-            <div class="in-category"></div>
-            Other in category: {{ conference.category }}
-            <div class="in-organizer"></div>
-            Other by : {{ conference.organizer }}
+            <div class="in-category">
+                <h4>Other in category: {{ conference.category }}</h4>
+                <!-- TODO zmienic href na router -->
+                <a
+                    href="/conferences/{{ conference.key }}"
+                    *ngFor="let conference of inCategoryConferences"
+                >
+                    {{ conference.name }}
+                </a>
+            </div>
+            <div class="in-city">
+                <h4>Other in : {{ conference.city }}</h4>
+                <a
+                    href="/conferences/{{ conference.key }}"
+                    *ngFor="let conference of inCityConferences"
+                >
+                    {{ conference.name }}
+                </a>
+            </div>
         </div>
 
         <mat-list class="comments">

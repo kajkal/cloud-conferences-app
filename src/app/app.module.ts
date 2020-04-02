@@ -48,7 +48,7 @@ import { UpdateConferenceComponent } from "./components/update-conference/update
         ConferenceThumbnailComponent,
         AddConferenceComponent,
         ConferenceComponent,
-        UpdateConferenceComponent
+        UpdateConferenceComponent,
     ],
     entryComponents: [UpdateConferenceComponent],
     imports: [

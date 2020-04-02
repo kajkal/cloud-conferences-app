@@ -1,4 +1,4 @@
-.conference-actions{
+.conference-actions {
     position: absolute;
     right: 0;
 }
@@ -11,25 +11,25 @@
     position: relative;
 }
 
-.mat-card-content{
+.mat-card-content {
     padding: 1%;
     display: flex;
     flex-wrap: wrap;
 }
 
-.details{
+.details {
     font-size: 1.5em;
     width: 30%;
 }
 
-.details > *{
+.details > * {
     padding-top: 3%;
 }
 .details button {
     margin-top: 6%;
 }
 
-.booking{
+.booking {
     font-size: 1.5em;
     display: flex;
     flex-direction: column;
@@ -38,11 +38,25 @@
     text-align: center;
     width: 40%;
 }
-.other{
+.other {
     font-size: 1.2em;
     width: 30%;
+    a {
+        text-decoration: none;
+        color: black;
+    }
+    a:hover{
+        color: gray;
+    }
+    .in-category, .in-city{
+        display: flex;
+        flex-direction: column;
+    }
+    h4{
+        margin: 1em 0 1em 0;
+    }
 }
-.comments{
+.comments {
     padding-top: 8%;
     width: 100%;
 }
