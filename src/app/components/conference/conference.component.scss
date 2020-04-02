@@ -11,6 +11,41 @@
     position: relative;
 }
 
+.mat-card-content{
+    padding: 1%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.details{
+    font-size: 1.5em;
+    width: 30%;
+}
+
+.details > *{
+    padding-top: 3%;
+}
+.details button {
+    margin-top: 6%;
+}
+
+.booking{
+    font-size: 1.5em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 40%;
+}
+.other{
+    font-size: 1.2em;
+    width: 30%;
+}
+.comments{
+    padding-top: 8%;
+    width: 100%;
+}
 
 .comments {
     margin-top: 2rem;

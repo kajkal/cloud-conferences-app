@@ -1,25 +1,42 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule } from "@angular/core";
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './components/app/app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SignInComponent } from './components/sign-in/sign-in.component';
-import { ConferencesComponent } from './components/conferences/conferences.component';
-import { MatToolbarModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, MatProgressSpinnerModule, MatCardModule, MatDatepickerModule, MatNativeDateModule, MatListModule, MatProgressBarModule, MatMenuModule, MatBadgeModule, MatTooltipModule, MatGridListModule, MatDialogModule, MatSidenavModule } from '@angular/material';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { AngularFireAuthModule } from '@angular/fire/auth';
-import { AngularFireModule } from '@angular/fire';
-import { AngularFireDatabaseModule } from '@angular/fire/database';
-import { environment } from '../environments/environment';
-import { LogoutComponent } from './components/logout/logout.component';
-import { HeaderComponent } from './components/header/header.component';
-import { ConferenceThumbnailComponent } from './components/conference-thumbnail/conference-thumbnail.component';
-import { AddConferenceComponent } from './components/add-conference/add-conference.component';
-import { ConferenceComponent } from './components/conference/conference.component';
-import { UpdateConferenceComponent } from './components/update-conference/update-conference.component';
-
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./components/app/app.component";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { SignInComponent } from "./components/sign-in/sign-in.component";
+import { ConferencesComponent } from "./components/conferences/conferences.component";
+import {
+    MatToolbarModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+    MatProgressSpinnerModule,
+    MatCardModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatListModule,
+    MatProgressBarModule,
+    MatMenuModule,
+    MatBadgeModule,
+    MatTooltipModule,
+    MatGridListModule,
+    MatDialogModule,
+    MatSidenavModule
+} from "@angular/material";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { HttpClientModule } from "@angular/common/http";
+import { AngularFireAuthModule } from "@angular/fire/auth";
+import { AngularFireModule } from "@angular/fire";
+import { AngularFireDatabaseModule } from "@angular/fire/database";
+import { environment } from "../environments/environment";
+import { LogoutComponent } from "./components/logout/logout.component";
+import { HeaderComponent } from "./components/header/header.component";
+import { ConferenceThumbnailComponent } from "./components/conference-thumbnail/conference-thumbnail.component";
+import { AddConferenceComponent } from "./components/add-conference/add-conference.component";
+import { ConferenceComponent } from "./components/conference/conference.component";
+import { UpdateConferenceComponent } from "./components/update-conference/update-conference.component";
 
 @NgModule({
     declarations: [
@@ -31,8 +48,9 @@ import { UpdateConferenceComponent } from './components/update-conference/update
         ConferenceThumbnailComponent,
         AddConferenceComponent,
         ConferenceComponent,
-        UpdateConferenceComponent,
+        UpdateConferenceComponent
     ],
+    entryComponents: [UpdateConferenceComponent],
     imports: [
         BrowserModule,
         AppRoutingModule,
@@ -62,10 +80,9 @@ import { UpdateConferenceComponent } from './components/update-conference/update
 
         AngularFireModule.initializeApp(environment.firebaseConfig),
         AngularFireAuthModule,
-        AngularFireDatabaseModule,
+        AngularFireDatabaseModule
     ],
     providers: [],
-    bootstrap: [ AppComponent ],
+    bootstrap: [AppComponent]
 })
-export class AppModule {
-}
+export class AppModule {}

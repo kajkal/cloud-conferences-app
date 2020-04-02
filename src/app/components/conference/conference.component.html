@@ -26,12 +26,11 @@
             </ng-container>
         </div>
 
-        <mat-card-title>{{ conference.name }}</mat-card-title>
-
-        <mat-card-subtitle>
-            <p class="organizer">{{ conference.organizer }}</p>
-        </mat-card-subtitle>
-        <div>
+        <div class="details">
+            <mat-card-title>{{ conference.name }}</mat-card-title>
+            <mat-card-subtitle>
+                <p class="organizer">{{ conference.organizer }}</p>
+            </mat-card-subtitle>
             <div class="price">{{ conference.price | currency: "PLN" }}</div>
 
             <div style="margin: 1em">
@@ -44,9 +43,11 @@
                 <mat-icon style="margin-right: 1em">room</mat-icon>
                 <span>{{ conference.city }}</span>
             </div>
+            <a href="{{ conference.detailUrl }}">
+                <button mat-raised-button color="primary">Show details</button>
+            </a>
         </div>
-
-        <div class="conference-booking">
+        <div class="booking">
             <div class="actions" (click)="preventNavigation($event)">
                 <div class="available">
                     Available:
@@ -107,17 +108,22 @@
                     <mat-icon>exposure_plus_1</mat-icon>
                 </button>
             </div>
+            <span
+                [style.color]="
+                    getReservedPlacesCount(conference) === 0
+                        ? '#ccc'
+                        : 'inherit'
+                "
+            >
+                Reserved places: {{ getReservedPlacesCount(conference) }}
+            </span>
         </div>
-
-        <p class="description">{{ conference.description }}</p>
-
-        <span
-            [style.color]="
-                getReservedPlacesCount(conference) === 0 ? '#ccc' : 'inherit'
-            "
-        >
-            Reserved places: {{ getReservedPlacesCount(conference) }}
-        </span>
+        <div class="other">
+            <div class="in-category"></div>
+            Other in category: {{ conference.category }}
+            <div class="in-organizer"></div>
+            Other by : {{ conference.organizer }}
+        </div>
 
         <mat-list class="comments">
             <h3 mat-subheader>Comments</h3>
