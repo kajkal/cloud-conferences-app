@@ -2,7 +2,7 @@
     Filters
 </button>
 
-<mat-drawer-container class="example-container" autosize>
+<mat-drawer-container class="example-container">
     <mat-drawer
         #sidenav
         [mode]="(layoutService.isMobile$ | async) ? 'over' : 'side'"
@@ -18,8 +18,28 @@
                 />
             </mat-form-field>
         </div>
-
-
+        <div class="filter-container city-filter">
+            <ng-multiselect-dropdown
+                [settings]="citySettings"
+                [data]="cityList"
+                [placeholder]="'City'"
+                (onSelect)="setCities($event)"
+                (onDeSelect)="trimCities($event)"
+                [(ngModel)]="filters.selectedCities"
+            >
+            </ng-multiselect-dropdown>
+        </div>
+        <div class="filter-container categories-filter">
+            <ng-multiselect-dropdown
+                [settings]="categoriesSettings"
+                [data]="categoriesList"
+                [placeholder]="'Category'"
+                (onSelect)="setCategories($event)"
+                (onDeSelect)="trimCategories($event)"
+                [(ngModel)]="filters.selectedCategories"
+            >
+            </ng-multiselect-dropdown>
+        </div>
     </mat-drawer>
 
     <mat-drawer-content>

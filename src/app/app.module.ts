@@ -37,7 +37,7 @@ import { ConferenceThumbnailComponent } from "./components/conference-thumbnail/
 import { AddConferenceComponent } from "./components/add-conference/add-conference.component";
 import { ConferenceComponent } from "./components/conference/conference.component";
 import { UpdateConferenceComponent } from "./components/update-conference/update-conference.component";
-
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 @NgModule({
     declarations: [
         AppComponent,
@@ -77,7 +77,7 @@ import { UpdateConferenceComponent } from "./components/update-conference/update
         MatTooltipModule,
         MatGridListModule,
         MatDialogModule,
-
+        NgMultiSelectDropDownModule.forRoot(),
         AngularFireModule.initializeApp(environment.firebaseConfig),
         AngularFireAuthModule,
         AngularFireDatabaseModule

@@ -38,20 +38,22 @@ export class ConferenceComponent implements OnInit {
 
         this.conferencesService.fetchConferences().subscribe(conferences => {
             this.conference$.subscribe(currentConference => {
-                this.inCityConferences = conferences.filter(
-                    conference => conference.city === currentConference.city
-                ).slice(0, 5);;
-                console.log(this.inCityConferences);
+                this.inCityConferences = conferences
+                    .filter(
+                        conference => conference.city === currentConference.city
+                    )
+                    .slice(0, 5);
             });
         });
 
         this.conferencesService.fetchConferences().subscribe(conferences => {
             this.conference$.subscribe(currentConference => {
-                this.inCategoryConferences = conferences.filter(
-                    conference =>
-                        conference.category === currentConference.category
-                ).slice(0, 5);
-                console.log(this.inCategoryConferences);
+                this.inCategoryConferences = conferences
+                    .filter(
+                        conference =>
+                            conference.category === currentConference.category
+                    )
+                    .slice(0, 5);
             });
         });
 

@@ -1,5 +1,5 @@
 .mat-drawer {
-    min-width: 350px;
+    width: 350px;
     padding: 1em;
 
     .filter-container {
@@ -16,12 +16,12 @@
         }
     }
 
-    .search-filter {
+    .city-filter {
         margin-top: 3em;
     }
 
-    .price-filter {
-        min-height: 15em;
+    .categories-filter {
+        min-height: 3em;
     }
 }
 
@@ -38,6 +38,7 @@
         .conferences {
             height: calc(100vh - 64px);
             padding: 1em;
+            margin-right: 5%;
 
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -48,13 +49,14 @@
 
 @media (min-width: 900px) {
     .mat-drawer-content {
+        min-height: 90vh;
         display: flex;
         .conferences {
             display: flex;
             flex-wrap: wrap;
-            margin: 1em;
+            margin: 3em;
         }
-        .conferences > *{
+        .conferences > * {
             margin: 1em;
         }
     }

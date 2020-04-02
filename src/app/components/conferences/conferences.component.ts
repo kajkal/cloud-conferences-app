@@ -4,7 +4,9 @@ import { Conference } from "../../models/Conference";
 import { Observable } from "rxjs";
 import { distinctUntilChanged, map, tap } from "rxjs/operators";
 import { LayoutService } from "../../services/layout/layout.service";
+import { CategoriesService } from "../../services/categories/categories.service";
 import { FormControl, FormGroup } from "@angular/forms";
+import { IDropdownSettings } from "ng-multiselect-dropdown";
 
 @Component({
     selector: "app-conferences",
@@ -15,90 +17,105 @@ export class ConferencesComponent implements OnInit {
     private filteredConferences$: Observable<Conference[]>;
 
     filters = {
-        price: {
-            min: 0,
-            max: 0
-        },
-        searchPhrase: /.*/
+        searchPhrase: "",
+        selectedCities: [],
+        selectedCategories: []
+    };
+
+    cityList = [];
+    citySettings: IDropdownSettings = {
+        singleSelection: false,
+        idField: "item_id",
+        textField: "item_text",
+        itemsShowLimit: 2,
+        allowSearchFilter: true,
+        enableCheckAll: true
+    };
+
+    categoriesList = [];
+    categoriesSettings: IDropdownSettings = {
+        singleSelection: false,
+        idField: "item_id",
+        textField: "item_text",
+        itemsShowLimit: 2,
+        allowSearchFilter: true,
+        enableCheckAll: true
     };
 
     constructor(
         private conferencesService: ConferencesService,
+        private categoriesService: CategoriesService,
         private layoutService: LayoutService
     ) {}
 
     ngOnInit() {
-
-            this.conferencesService.conferences$
-                .pipe(
-                    map(conferences =>
-                        conferences.map(conference => conference.price)
-                    ),
-                    map(prices => ({
-                        floor: prices.length ? Math.min(...prices) : 0,
-                        ceil: prices.length ? Math.max(...prices) : 0
-                    })),
-                    distinctUntilChanged(
-                        (a, b) => a.floor === b.floor && a.ceil === b.ceil
-                    )
-                )
-                .subscribe(({ floor, ceil }) => {
-                    const { min, max } = this.filters.price;
-                    let updateFilters = false;
-
-                    if (min < floor || min > ceil) {
-                        this.filters.price.min = floor;
-                        updateFilters = true;
-                    }
-
-                    if (max < floor || max > ceil) {
-                        this.filters.price.max = ceil;
-                        updateFilters = true;
-                    }
-
-                    if (updateFilters) {
-                        this.updateFilters();
-                    }
-                });
-
         this.filteredConferences$ = this.conferencesService.conferences$;
+        this.getCityList();
+        this.getCategoriesList();
+        this.updateFilters();
     }
 
-    private updateFilters() {
-        this.filters = { ...this.filters };
+    setCities(e) {
+        this.updateFilters();
+    }
+
+    trimCities(e) {
+        this.updateFilters();
+    }
+
+    getCityList() {
+        this.conferencesService.conferences$.subscribe(conferences => {
+            this.cityList = [...new Set(conferences.map(x => x.city))];
+        });
+    }
+
+    setCategories(e) {
+        this.updateFilters();
+    }
+
+    trimCategories(e) {
+        this.updateFilters();
+    }
+
+    getCategoriesList() {
+        this.categoriesService
+            .getCategories()
+            .valueChanges()
+            .subscribe(categories => {
+                this.categoriesList = [...new Set(categories.map(x => x.name))];
+            });
+    }
+
+    updateFilters() {
+        console.log(this.filters.selectedCategories);
+        console.log(this.filters.selectedCities);
         this.filteredConferences$ = this.conferencesService.conferences$.pipe(
             map(conferences =>
                 conferences
                     .filter(conference =>
-                        this.filters.searchPhrase.test(
-                            conference.name.toLowerCase()
-                        )
+                        conference.name
+                            .toLowerCase()
+                            .includes(this.filters.searchPhrase.toLowerCase())
                     )
-                    .filter(
-                        conference =>
-                            conference.price >= this.filters.price.min &&
-                            conference.price <= this.filters.price.max
-                    )
+                    .filter(conference => {
+                        if (this.filters.selectedCategories.length === 0)
+                            return true;
+                        return this.filters.selectedCategories.includes(
+                            conference.category
+                        );
+                    })
+                    .filter(conference => {
+                        if (this.filters.selectedCities.length === 0)
+                            return true;
+                        return this.filters.selectedCities.includes(conference.city);
+                    })
             )
-            // tap(console.log),
         );
     }
 
-    // handlePriceFilterChange(changeContext: ChangeContext) {
-    //     console.log('handlePriceFilter', { min: changeContext.value, max: changeContext.highValue });
-
-    //     this.filters.price = {
-    //         min: changeContext.value,
-    //         max: changeContext.highValue,
-    //     };
-    //     this.updateFilters();
-    // }
-
     handleSearchFilterKeyUp(event: any) {
         const searchPhrase = event.target.value;
-        this.filters.searchPhrase = new RegExp(
-            ["", ...searchPhrase.toLowerCase()].map(c => `${c}.*`).join("")
-        );
+        this.filters.searchPhrase = searchPhrase;
         this.updateFilters();
     }
 }
