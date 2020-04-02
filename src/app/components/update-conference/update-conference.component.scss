@@ -1,9 +1,10 @@
-form {
+form{
     margin: 1em;
-    width: 500px;
+    width: 40vw;
 }
-
-.mat-dialog-content {
+.mat-card-content {
     display: flex;
+    margin: 1em;
+    flex-wrap: wrap;
     flex-direction: column;
 }

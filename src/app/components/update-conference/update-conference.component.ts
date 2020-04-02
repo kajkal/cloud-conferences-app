@@ -23,6 +23,7 @@ export class UpdateConferenceComponent implements OnInit {
             name,
             city,
             organizer,
+            category,
             contact,
             startDate,
             endDate,
@@ -35,6 +36,7 @@ export class UpdateConferenceComponent implements OnInit {
             name: new FormControl(name, [Validators.required]),
             city: new FormControl(city, [Validators.required]),
             organizer: new FormControl(organizer, [Validators.required]),
+            category: new FormControl(organizer, [Validators.required]),
             contact: new FormControl(contact, [Validators.required]),
             startDate: new FormControl(new Date(startDate), [
                 Validators.required
@@ -84,7 +86,7 @@ export class UpdateConferenceComponent implements OnInit {
         return this.form.get("detailUrl");
     }
 
-    async updateTrip() {
+    async updateConference() {
       const {
         name,
         city,

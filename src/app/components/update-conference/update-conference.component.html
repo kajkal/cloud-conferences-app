@@ -1,1 +1,188 @@
-<p>update-conference works!</p>
+<form novalidate [formGroup]="form" (ngSubmit)="updateConference()">
+    <mat-card-content>
+        <mat-form-field>
+            <input
+                matInput
+                type="text"
+                placeholder="Conference name"
+                formControlName="name"
+                id="name"
+            />
+
+            <mat-error *ngIf="name.invalid">
+                <span *ngIf="name.errors.required"
+                    >Conference name is required.</span
+                >
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input
+                matInput
+                type="text"
+                placeholder="City"
+                formControlName="city"
+                id="city"
+            />
+
+            <mat-error *ngIf="city.invalid">
+                <span *ngIf="city.errors.required">City is required.</span>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input
+                matInput
+                type="text"
+                placeholder="Organizer"
+                formControlName="organizer"
+                id="organizer"
+            />
+
+            <mat-error *ngIf="organizer.invalid">
+                <span *ngIf="organizer.errors.required"
+                    >Organizer is required.</span
+                >
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input
+                matInput
+                type="text"
+                placeholder="Contact"
+                formControlName="contact"
+                id="contact"
+            />
+
+            <mat-error *ngIf="contact.invalid">
+                <span *ngIf="contact.errors.required"
+                    >Contact is required.</span
+                >
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input
+                matInput
+                type="text"
+                placeholder="Category"
+                formControlName="category"
+                id="category"
+            />
+
+            <mat-error *ngIf="category.invalid">
+                <span *ngIf="category.errors.required"
+                    >Category is required.</span
+                >
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input
+                matInput
+                [matDatepicker]="startDatePicker"
+                placeholder="Choose a start date"
+                formControlName="startDate"
+                id="startDate"
+            />
+            <mat-datepicker-toggle
+                matSuffix
+                [for]="startDatePicker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #startDatePicker></mat-datepicker>
+
+            <mat-error *ngIf="startDate.invalid">
+                <span *ngIf="startDate.errors.required"
+                    >Start date is required.</span
+                >
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input
+                matInput
+                [matDatepicker]="endDatePicker"
+                placeholder="Choose a end date"
+                formControlName="endDate"
+                id="endDate"
+            />
+            <mat-datepicker-toggle
+                matSuffix
+                [for]="endDatePicker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #endDatePicker></mat-datepicker>
+
+            <mat-error *ngIf="endDate.invalid">
+                <span *ngIf="endDate.errors.required"
+                    >End date is required.</span
+                >
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input
+                matInput
+                type="number"
+                placeholder="Price"
+                formControlName="price"
+                id="price"
+            />
+
+            <mat-error *ngIf="price.invalid">
+                <span *ngIf="price.errors.required">Price is required.</span>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input
+                matInput
+                type="number"
+                placeholder="Slots"
+                formControlName="slots"
+                id="slots"
+            />
+
+            <mat-error *ngIf="slots.invalid">
+                <span *ngIf="slots.errors.required">Slots is required.</span>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input
+                matInput
+                type="text"
+                placeholder="Event website"
+                formControlName="detailUrl"
+                id="detailUrl"
+            />
+
+            <mat-error *ngIf="detailUrl.invalid">
+                <span *ngIf="detailUrl.errors.required"
+                    >Event website is required.</span
+                >
+            </mat-error>
+        </mat-form-field>
+    </mat-card-content>
+
+    <mat-card-actions>
+        <mat-error *ngIf="form.errors">
+            <div>{{ form.errors | json }}</div>
+            <span *ngIf="form.errors.badCredentials">
+                The username or password is invalid.
+            </span>
+        </mat-error>
+
+        <button
+            mat-raised-button
+            color="warn"
+            type="button"
+            (click)="onCancelClick()"
+        >
+            Cancel
+        </button>
+        <button mat-raised-button color="primary" [disabled]="form.invalid">
+            Update
+        </button>
+    </mat-card-actions>
+</form>
