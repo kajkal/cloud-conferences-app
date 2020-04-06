@@ -1,0 +1,30 @@
+<section class="confirmation">
+
+    <mat-card>
+
+        <p>
+            Your account will be charged with {{totalTotalPrice$ | async | currency: 'EUR'}}.
+        </p>
+
+        <mat-card-actions align="end">
+
+            <button
+                mat-raised-button
+                color="warn"
+                (click)="back()"
+            >
+                Back
+            </button>
+
+            <button
+                mat-raised-button
+                color="primary"
+                (click)="confirm()"
+            >
+                Confirm
+            </button>
+
+        </mat-card-actions>
+    </mat-card>
+
+</section>

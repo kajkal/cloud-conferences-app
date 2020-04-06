@@ -39,6 +39,7 @@ import { ConferenceComponent } from "./components/conference/conference.componen
 import { UpdateConferenceComponent } from "./components/update-conference/update-conference.component";
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { BookingComponent } from './components/booking/booking.component';
+import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 @NgModule({
     declarations: [
         AppComponent,
@@ -51,6 +52,7 @@ import { BookingComponent } from './components/booking/booking.component';
         ConferenceComponent,
         UpdateConferenceComponent,
         BookingComponent,
+        ConfirmationComponent,
     ],
     entryComponents: [UpdateConferenceComponent],
     imports: [

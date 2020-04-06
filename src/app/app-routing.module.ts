@@ -9,6 +9,7 @@ import { AddConferenceComponent } from './components/add-conference/add-conferen
 import { ConferenceComponent } from './components/conference/conference.component';
 import { AdminGuard } from './guards/admin/admin.guard';
 import { BookingComponent } from './components/booking/booking.component';
+import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 
 
 const routes: Routes = [
@@ -44,6 +45,11 @@ const routes: Routes = [
         path: 'booking',
         canActivate: [ AuthGuard ],
         component: BookingComponent,
+    },
+    {
+        path: 'confirmation',
+        canActivate: [ AuthGuard ],
+        component: ConfirmationComponent,
     },
     {
         path: 'admin',
