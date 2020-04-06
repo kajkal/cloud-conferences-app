@@ -51,6 +51,14 @@ export class ConferencesService {
         return this.fetchConference(conferenceToUpdate.key).set(conferenceToUpdate);
     }
 
+    addComment(relatedConference: Conference, comment: ConferenceComment) {
+        return this.db.object(`/conferences/${relatedConference.key}/comments`)
+            .set([
+                ...(relatedConference.comments || []),
+                comment,
+            ]);
+    }
+
     deleteConference(conferenceToDelete: Conference) {
         return this.fetchConference(conferenceToDelete.key).remove();
     }

@@ -140,19 +140,11 @@ export class ConferenceComponent implements OnInit {
     }
 
     async addComment(conference: Conference) {
-        console.log("addComment", this.form.value);
-
         try {
-            await this.conferencesService.updateConference({
-                ...conference,
-                comments: [
-                    ...(conference.comments || []),
-                    {
-                        timestamp: new Date().toISOString(),
-                        author: this.authService.user.email,
-                        content: this.form.value.comment
-                    }
-                ]
+            await this.conferencesService.addComment(conference, {
+                timestamp: new Date().toISOString(),
+                author: this.authService.user.email,
+                content: this.form.value.comment,
             });
             this.comment.setValue("");
             this.comment.setErrors(null);
