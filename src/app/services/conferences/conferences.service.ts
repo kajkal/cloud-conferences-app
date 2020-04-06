@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { NewConference, Conference } from "../../models/Conference";
+import { NewConference, Conference, ConferenceComment } from '../../models/Conference';
 import { BehaviorSubject, Observable, of, timer } from "rxjs";
 import { delay, filter, find, map, tap } from "rxjs/operators";
 import { AngularFireDatabase } from "@angular/fire/database";
