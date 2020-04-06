@@ -18,8 +18,8 @@ import { UpdateConferenceComponent } from "../update-conference/update-conferenc
 })
 export class ConferenceComponent implements OnInit {
     public form: FormGroup;
-    private inCategoryConferences: Conference[];
-    private inCityConferences: Conference[];
+    public inCategoryConferences: Conference[];
+    public inCityConferences: Conference[];
     conference$: Observable<Conference>;
 
     constructor(
@@ -27,7 +27,7 @@ export class ConferenceComponent implements OnInit {
         private router: Router,
         private conferencesService: ConferencesService,
         private bookingService: BookingService,
-        private authService: AuthService,
+        public authService: AuthService,
         public dialog: MatDialog
     ) {}
 

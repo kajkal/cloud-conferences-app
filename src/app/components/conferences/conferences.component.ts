@@ -15,7 +15,7 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
 })
 export class ConferencesComponent implements OnInit {
 
-    private filteredConferences$: Observable<Conference[]>;
+    public filteredConferences$: Observable<Conference[]>;
 
     filters = {
         searchPhrase: '',
@@ -42,9 +42,9 @@ export class ConferencesComponent implements OnInit {
     };
 
     constructor(
-        private conferencesService: ConferencesService,
-        private categoriesService: CategoriesService,
-        private layoutService: LayoutService,
+        public conferencesService: ConferencesService,
+        public categoriesService: CategoriesService,
+        public layoutService: LayoutService,
     ) {
     }
 
