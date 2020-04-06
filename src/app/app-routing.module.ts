@@ -38,7 +38,12 @@ const routes: Routes = [
                 path: ':conferenceKey',
                 component: ConferenceComponent,
             },
-        ]
+        ],
+    },
+    {
+        path: 'booking',
+        canActivate: [ AuthGuard ],
+        component: BookingComponent,
     },
     {
         path: 'admin',

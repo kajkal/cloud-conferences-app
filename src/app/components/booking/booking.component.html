@@ -1,0 +1,56 @@
+<section class="booking-summary">
+
+    <mat-card>
+        <mat-list role="list">
+
+            <mat-list-item role="listitem">
+                <div class="data-row header">
+                    <span>Conference Name</span>
+                    <span>Price</span>
+                    <span>Selected places count</span>
+                    <span>Total Price</span>
+                </div>
+            </mat-list-item>
+
+            <mat-list-item *ngFor="let conference of selectedConferences$ | async" role="listitem">
+                <div class="data-row">
+
+                    <a routerLink="/conferences/{{ conference.key }}">{{ conference.name }}</a>
+                    <span>{{ conference.price | currency:'EUR' }}</span>
+                    <span>{{ conference.selectedPlacesCount }}</span>
+                    <span>{{ conference.selectedPlacesCount * conference.price | currency:'EUR' }}</span>
+                </div>
+            </mat-list-item>
+
+            <mat-divider></mat-divider>
+
+            <mat-list-item role="listitem">
+                <div class="data-row summary">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span>{{ totalTotalPrice$ | async | currency:'EUR' }}</span>
+                </div>
+            </mat-list-item>
+
+        </mat-list>
+
+        <mat-card-actions align="end">
+            <button
+                mat-raised-button color="warn"
+                (click)="handleCancel()"
+                type="button"
+            >
+                Cancel
+            </button>
+            <button
+                mat-raised-button color="primary"
+                [disabled]="(selectedConferences$ | async)?.length === 0"
+                (click)="handleProceed()"
+            >
+                Proceed
+            </button>
+        </mat-card-actions>
+    </mat-card>
+
+</section>

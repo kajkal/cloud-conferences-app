@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
-import { interval, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { BookingService } from '../../services/booking/booking.service';
 
 
 enum HeaderMode {
@@ -22,6 +23,7 @@ export class HeaderComponent {
 
     constructor(
         private authService: AuthService,
+        private bookingService: BookingService,
     ) {
         this.mode$ = authService.authState$
             .pipe(
@@ -32,7 +34,13 @@ export class HeaderComponent {
                     return (authState.isAdmin) ? HeaderMode.ADMIN : HeaderMode.USER;
                 }),
             );
-        this.selectedPlacesCount$ = interval(1000); // todo connect with cart service
+        this.selectedPlacesCount$ = bookingService.bookingList$
+            .pipe(
+                map((bookingList): number => (
+                    Array.from(bookingList.conferences.values())
+                        .reduce((accumulator, current) => accumulator + current, 0)
+                )),
+            );
     }
 
 }
