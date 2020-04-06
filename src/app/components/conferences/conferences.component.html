@@ -21,10 +21,10 @@
         <div class="filter-container city-filter">
             <ng-multiselect-dropdown
                 [settings]="citySettings"
-                [data]="cityList"
+                [data]="conferencesService.conferences$ | async"
                 [placeholder]="'City'"
-                (onSelect)="setCities($event)"
-                (onDeSelect)="trimCities($event)"
+                (onSelect)="updateFilters()"
+                (onDeSelect)="updateFilters()"
                 [(ngModel)]="filters.selectedCities"
             >
             </ng-multiselect-dropdown>
@@ -32,10 +32,10 @@
         <div class="filter-container categories-filter">
             <ng-multiselect-dropdown
                 [settings]="categoriesSettings"
-                [data]="categoriesList"
+                [data]="categoriesService.categories$ | async"
                 [placeholder]="'Category'"
-                (onSelect)="setCategories($event)"
-                (onDeSelect)="trimCategories($event)"
+                (onSelect)="updateFilters()"
+                (onDeSelect)="updateFilters()"
                 [(ngModel)]="filters.selectedCategories"
             >
             </ng-multiselect-dropdown>

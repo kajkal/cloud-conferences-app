@@ -6,22 +6,10 @@
         margin-top: 2em;
         display: flex;
         flex-direction: column;
-
-        h5 {
-            text-align: center;
-        }
-
-        ng5-slider {
-            flex-grow: 1;
-        }
     }
 
-    .city-filter {
+    .search-filter {
         margin-top: 3em;
-    }
-
-    .categories-filter {
-        min-height: 3em;
     }
 }
 

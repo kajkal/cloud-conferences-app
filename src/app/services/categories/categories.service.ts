@@ -1,14 +1,25 @@
-import { Injectable } from "@angular/core";
-import { AngularFireDatabase } from "@angular/fire/database";
+import { Injectable } from '@angular/core';
+import { AngularFireDatabase } from '@angular/fire/database';
+import { Category } from '../../models/Category';
+import { BehaviorSubject } from 'rxjs';
+
 
 @Injectable({
-    providedIn: "root"
+    providedIn: 'root',
 })
 export class CategoriesService {
 
-    constructor(private db: AngularFireDatabase) {}
+    public categories$: BehaviorSubject<Category[]>;
 
-    getCategories(){
-        return this.db.list<string>('/categories');
-      }
+    constructor(private db: AngularFireDatabase) {
+        this.categories$ = new BehaviorSubject([]);
+        this.fetchCategories()
+            .valueChanges()
+            .subscribe(value => this.categories$.next(value));
+    }
+
+    private fetchCategories() {
+        return this.db.list<Category>('/categories');
+    }
+
 }
